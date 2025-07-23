@@ -95,9 +95,9 @@ class MacApplicationLauncherSkill(FallbackSkill):
                     ]
                     self.intent_matchers[l2].add_intent(intent_name, samples)
 
-    def can_answer(self, message: Message) -> bool:
-        utterance = message.data["utterances"][0]
-        res = self.match_app(utterance, self.lang)
+    def can_answer(self, utterances: List[str], lang: str) -> bool:
+        utterance = utterances[0]
+        res = self.match_app(utterance, lang)
         if res is None:
             return False
         return bool(res.get("entities", {}).get("application"))
